@@ -1,0 +1,53 @@
+[2025-07-02T07:46:13.476+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-07-02T07:46:13.517+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: extract_raw_data_pipeline.run_dbt_trusted scheduled__2025-07-01T07:59:00+00:00 [queued]>
+[2025-07-02T07:46:13.529+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: extract_raw_data_pipeline.run_dbt_trusted scheduled__2025-07-01T07:59:00+00:00 [queued]>
+[2025-07-02T07:46:13.529+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2025-07-02T07:46:13.547+0000] {taskinstance.py:2888} INFO - Executing <Task(BashOperator): run_dbt_trusted> on 2025-07-01 07:59:00+00:00
+[2025-07-02T07:46:13.568+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=1419) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-07-02T07:46:13.570+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'extract_raw_data_pipeline', 'run_dbt_trusted', 'scheduled__2025-07-01T07:59:00+00:00', '--job-id', '91', '--raw', '--subdir', 'DAGS_FOLDER/driven_data_pipeline.py', '--cfg-path', '/tmp/tmp7fy9xx5c']
+[2025-07-02T07:46:13.575+0000] {standard_task_runner.py:72} INFO - Started process 1424 to run task
+[2025-07-02T07:46:13.575+0000] {standard_task_runner.py:105} INFO - Job 91: Subtask run_dbt_trusted
+[2025-07-02T07:46:13.647+0000] {task_command.py:467} INFO - Running <TaskInstance: extract_raw_data_pipeline.run_dbt_trusted scheduled__2025-07-01T07:59:00+00:00 [running]> on host 24d4a3002b8f
+[2025-07-02T07:46:13.754+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='extract_raw_data_pipeline' AIRFLOW_CTX_TASK_ID='run_dbt_trusted' AIRFLOW_CTX_EXECUTION_DATE='2025-07-01T07:59:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-01T07:59:00+00:00'
+[2025-07-02T07:46:13.755+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-07-02T07:46:13.781+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-07-02T07:46:13.785+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'set -x; cd /opt/***/dbt && dbt run --select tag:trusted']
+[2025-07-02T07:46:13.796+0000] {subprocess.py:86} INFO - Output:
+[2025-07-02T07:46:13.807+0000] {subprocess.py:93} INFO - + cd /opt/***/dbt
+[2025-07-02T07:46:13.808+0000] {subprocess.py:93} INFO - + dbt run --select tag:trusted
+[2025-07-02T08:49:48.849+0000] {local_task_job_runner.py:228} ERROR - Heartbeat time limit exceeded!
+[2025-07-02T08:49:48.925+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-07-02T08:49:49.055+0000] {process_utils.py:132} INFO - Sending 15 to group 1424. PIDs of all processes in the group: [1428, 1429, 1424]
+[2025-07-02T08:49:49.102+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 1424
+[2025-07-02T08:49:49.172+0000] {taskinstance.py:3092} ERROR - Received SIGTERM. Terminating subprocesses.
+[2025-07-02T08:49:49.309+0000] {subprocess.py:104} INFO - Sending SIGTERM signal to process group
+[2025-07-02T08:49:49.698+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/bash.py", line 240, in execute
+    result = self.subprocess_hook.run_command(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/hooks/subprocess.py", line 91, in run_command
+    for raw_line in iter(self.sub_process.stdout.readline, b""):
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3094, in signal_handler
+    raise AirflowTaskTerminated("Task received SIGTERM signal")
+airflow.exceptions.AirflowTaskTerminated: Task received SIGTERM signal
+[2025-07-02T08:49:49.807+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=1429, status='terminated', started='07:46:13') (1429) terminated with exit code None
+[2025-07-02T08:49:49.863+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=extract_raw_data_pipeline, task_id=run_dbt_trusted, run_id=scheduled__2025-07-01T07:59:00+00:00, execution_date=20250701T075900, start_date=20250702T074613, end_date=20250702T084949
+[2025-07-02T08:49:50.045+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-07-02T08:49:50.133+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=1424, status='terminated', exitcode=2, started='07:46:13') (1424) terminated with exit code 2
+[2025-07-02T08:49:50.140+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=1428, status='terminated', started='07:46:13') (1428) terminated with exit code None

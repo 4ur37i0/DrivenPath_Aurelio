@@ -1,0 +1,65 @@
+[2025-07-02T03:13:32.625+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-07-02T03:13:32.646+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: extract_raw_data_pipeline.create_raw_table manual__2025-07-02T03:13:28.641100+00:00 [queued]>
+[2025-07-02T03:13:32.656+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: extract_raw_data_pipeline.create_raw_table manual__2025-07-02T03:13:28.641100+00:00 [queued]>
+[2025-07-02T03:13:32.657+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2025-07-02T03:13:32.668+0000] {taskinstance.py:2888} INFO - Executing <Task(SQLExecuteQueryOperator): create_raw_table> on 2025-07-02 03:13:28.641100+00:00
+[2025-07-02T03:13:32.696+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'extract_raw_data_pipeline', 'create_raw_table', 'manual__2025-07-02T03:13:28.641100+00:00', '--job-id', '59', '--raw', '--subdir', 'DAGS_FOLDER/driven_data_pipeline.py', '--cfg-path', '/tmp/tmphpnjm0qy']
+[2025-07-02T03:13:32.700+0000] {standard_task_runner.py:105} INFO - Job 59: Subtask create_raw_table
+[2025-07-02T03:13:32.694+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=422) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-07-02T03:13:32.704+0000] {standard_task_runner.py:72} INFO - Started process 424 to run task
+[2025-07-02T03:13:32.783+0000] {task_command.py:467} INFO - Running <TaskInstance: extract_raw_data_pipeline.create_raw_table manual__2025-07-02T03:13:28.641100+00:00 [running]> on host 24d4a3002b8f
+[2025-07-02T03:13:32.862+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='extract_raw_data_pipeline' AIRFLOW_CTX_TASK_ID='create_raw_table' AIRFLOW_CTX_EXECUTION_DATE='2025-07-02T03:13:28.641100+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-02T03:13:28.641100+00:00'
+[2025-07-02T03:13:32.866+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-07-02T03:13:32.891+0000] {sql.py:266} INFO - Executing: 
+        DROP TABLE IF EXISTS driven_raw.raw_batch_data;
+
+        CREATE TABLE driven_raw.raw_batch_data (
+            person_name VARCHAR(255),    -- Increased
+            user_name VARCHAR(255),      -- Increased
+            email VARCHAR(255),          -- Increased
+            personal_number VARCHAR(150), 
+            birth_date VARCHAR(100),     -- Should be fine, but could go to 255 for consistency
+            address VARCHAR(500),        -- Significantly increased for addresses
+            phone VARCHAR(100),          -- Increased (can be long with international formats)
+            mac_address VARCHAR(100),    -- Increased (standard is 17 chars, but safe to increase)
+            ip_address VARCHAR(100),     -- Increased (IPv6 can be 39 chars, but safe to increase)
+            iban VARCHAR(100),           -- Increased (can be up to 34 chars, but safe to increase)
+            accessed_at TIMESTAMP,
+            session_duration INT,
+            download_speed INT,
+            upload_speed INT,
+            consumed_traffic INT,
+            unique_id VARCHAR(100)
+        );
+    
+[2025-07-02T03:13:32.902+0000] {base.py:84} INFO - Retrieving connection 'postgres_conn'
+[2025-07-02T03:13:32.913+0000] {base.py:84} INFO - Retrieving connection 'postgres_conn'
+[2025-07-02T03:13:32.916+0000] {sql.py:509} INFO - Running statement: 
+        DROP TABLE IF EXISTS driven_raw.raw_batch_data;
+
+        CREATE TABLE driven_raw.raw_batch_data (
+            person_name VARCHAR(255),    -- Increased
+            user_name VARCHAR(255),      -- Increased
+            email VARCHAR(255),          -- Increased
+            personal_number VARCHAR(150), 
+            birth_date VARCHAR(100),     -- Should be fine, but could go to 255 for consistency
+            address VARCHAR(500),        -- Significantly increased for addresses
+            phone VARCHAR(100),          -- Increased (can be long with international formats)
+            mac_address VARCHAR(100),    -- Increased (standard is 17 chars, but safe to increase)
+            ip_address VARCHAR(100),     -- Increased (IPv6 can be 39 chars, but safe to increase)
+            iban VARCHAR(100),           -- Increased (can be up to 34 chars, but safe to increase)
+            accessed_at TIMESTAMP,
+            session_duration INT,
+            download_speed INT,
+            upload_speed INT,
+            consumed_traffic INT,
+            unique_id VARCHAR(100)
+        );
+    , parameters: None
+[2025-07-02T03:13:32.941+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-07-02T03:13:32.942+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=extract_raw_data_pipeline, task_id=create_raw_table, run_id=manual__2025-07-02T03:13:28.641100+00:00, execution_date=20250702T031328, start_date=20250702T031332, end_date=20250702T031332
+[2025-07-02T03:13:32.974+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-07-02T03:13:33.006+0000] {taskinstance.py:3900} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-07-02T03:13:33.008+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
